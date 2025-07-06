@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <string.h>
 #include "character.h"
 
 void print_status(Character *c) {
+	if (strcmp(c->weapon, "Staff") == 0) printf("📖 Focused on magic.\n");
 	printf("%s - HP: %d | Estus: %d\n", c->name, c->hp, c->estus);
 	printf("Weapon: %s | Spell: %s (%d uses)\n",
 		c->weapon ? c->weapon : "None",

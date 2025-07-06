@@ -13,20 +13,31 @@ int random_percent(void) {
 }
 
 void attack(Character *attacker, Character *defender) {
-	int crit = (random_percent() < CRIT_CHANCE);
-	int damage = rand() % attacker->max_damage + 1;
-	if (crit) {
-		damage *= 2;
-		printf("💥 Critical hit! ");
-	}
 	if (defender->rolled) {
-		printf("%s dodged the attack!\n", defender->name);
+		printf("🌀 %s dodged the attack!\n", defender->name);
 		defender->rolled = 0;
 		return;
 	}
+
+	int damage = attacker->max_damage;
+
+	// Weapon-specific bonus
+	if (strcmp(attacker->weapon, "Greatsword") == 0) {
+		damage += 5;
+		printf("💥 Heavy strike from the Greatsword!\n");
+	} else if (strcmp(attacker->weapon, "Axe") == 0) {
+		damage += rand() % 6;	/* spiky unpredictable */
+		printf("🪓 The Axe hits with wild force!\n");
+	} else if (strcmp(attacker->weapon, "Staff") == 0) {
+		damage -= 5;
+		printf("📏 Weak melee attack with the Staff.\n");		
+	}
+
+	printf("🗡️  %s attacks %s for %d damage!\n",
+           attacker->name, defender->name, damage);
+
 	defender->hp -= damage;
 	if (defender->hp < 0) defender->hp = 0;
-	printf("%s attacks %s for %d damage!\n", attacker->name, defender->name, damage);
 }
 
 void drink_estus(Character *c) {
