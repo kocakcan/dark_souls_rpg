@@ -21,18 +21,25 @@ int main(void) {
 	printf("⚔️  %s vs. %s begins!\n", player.name, boss.name);
 
 	while (is_alive(&player) && is_alive(&boss)) {
-		apply_status_effects(&player);
-		apply_status_effects(&boss);
-		printf("\n--- BATTLE STATUS ---\n");
-		print_status(&player);
-		print_status(&boss);
+	    printf("\n--- BATTLE STATUS ---\n");
+	    print_status(&player);
+	    print_status(&boss);
 
-		player_turn(&player, &boss);
+	    // Apply status effects before player's turn
+	    apply_status_effects(&player);
+	    apply_status_effects(&boss);
 
-		if (!is_alive(&boss)) break;
+	    // Player's turn
+	    player_turn(&player, &boss);
+	    if (!is_alive(&boss)) break;
 
-		printf("\n👹 %s's turn...\n", boss.name);
-		attack(&boss, &player);
+	    // Apply again in case boss got burned mid-turn
+	    apply_status_effects(&player);
+	    apply_status_effects(&boss);
+
+	    // Boss's turn
+	    printf("\n👹 %s's turn...\n", boss.name);
+	    attack(&boss, &player);
 	}
 
 	if (is_alive(&player))

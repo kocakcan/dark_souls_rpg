@@ -12,6 +12,9 @@ typedef struct {
 	int spell_uses;
 	char *spell_type;	/* Pyromancy, Sorcery, Miracle */
 	int burning;		/* Turns left for Fireball's DoT */
+	int str;		/* Strength */
+	int intel;		/* Intelligence */
+	int fth;		/* Faith */
 } Character;
 
 void print_status(Character *c);
