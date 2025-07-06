@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "constants.h"
 #include "combat.h"
 
@@ -47,4 +48,34 @@ void roll(Character *c) {
 		printf("💢 %s tries to roll but stumbles!\n", c->name);
 		c->rolled = 0;
 	}
+}
+
+void cast_spell(Character *caster, Character *target) {
+    if (caster->spell_uses <= 0) {
+        printf("❌ No spell uses left!\n");
+        return;
+    }
+
+    if (!caster->spell) {
+        printf("🌀 No spell equipped.\n");
+        return;
+    }
+
+    if (strcmp(caster->spell, "Soul Arrow") == 0) {
+        int damage = 25 + rand() % 10;
+        printf("✨ %s casts Soul Arrow! %s takes %d magic damage!\n",
+               caster->name, target->name, damage);
+        target->hp -= damage;
+    } else if (strcmp(caster->spell, "Fireball") == 0) {
+        int damage = 20 + rand() % 15;
+        printf("🔥 %s hurls a Fireball! %s is scorched for %d damage!\n",
+               caster->name, target->name, damage);
+        target->hp -= damage;
+    } else {
+        printf("🌀 No valid spell found.\n");
+        return;
+    }
+
+    if (target->hp < 0) target->hp = 0;
+    caster->spell_uses--;
 }

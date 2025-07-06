@@ -9,6 +9,7 @@ typedef struct {
 	int rolled;
 	char *weapon;
 	char *spell;
+	int spell_uses;
 } Character;
 
 void print_status(Character *c);

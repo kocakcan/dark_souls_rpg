@@ -17,16 +17,19 @@ void choose_class(Character *player) {
 			init_character(player, "Knight", 120, 20, 2);
 			player->weapon = "Greatsword";
 			player->spell = "None";
+			player->spell_uses = 0;
 			break;
 		case 2:
 			init_character(player, "Sorcerer", 80, 10, 1);
 			player->weapon = "Staff";
 			player->spell = "Soul Arrow";
+			player->spell_uses = 3;
 			break;
 		case 3:
 			init_character(player, "Pyromancer", 90, 15, 2);
 			player->weapon = "Axe";
 			player->spell = "Fireball";
+			player->spell_uses = 2;
 			break;
 		default:
 			printf("Invalid choice. Defaulting to Knight.\n");

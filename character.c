@@ -2,7 +2,11 @@
 #include "character.h"
 
 void print_status(Character *c) {
-	printf("%s - HP: %d | Estus: %d | Weapon: %s | Spell: %s\n", c->name, c->hp, c->estus, c->weapon, c->spell);
+	printf("%s - HP: %d | Estus: %d\n", c->name, c->hp, c->estus);
+	printf("Weapon: %s | Spell: %s (%d uses)\n",
+		c->weapon ? c->weapon : "None",
+		c->spell ? c->spell : "None",
+		c->spell_uses);
 }
 
 int is_alive(Character *c) {
@@ -17,4 +21,5 @@ void init_character(Character *c, char *name, int hp, int damage, int estus) {
 	c->rolled = 0;
 	c->weapon = "Bare Hands";
 	c->spell = "None";
+	c->spell_uses = 0;
 }
