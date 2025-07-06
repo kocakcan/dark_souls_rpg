@@ -67,26 +67,44 @@ void cast_spell(Character *caster, Character *target) {
         return;
     }
 
-    if (!caster->spell) {
-        printf("🌀 No spell equipped.\n");
-        return;
-    }
-
     if (strcmp(caster->spell, "Soul Arrow") == 0) {
         int damage = 25 + rand() % 10;
         printf("✨ %s casts Soul Arrow! %s takes %d magic damage!\n",
                caster->name, target->name, damage);
         target->hp -= damage;
-    } else if (strcmp(caster->spell, "Fireball") == 0) {
-        int damage = 20 + rand() % 15;
-        printf("🔥 %s hurls a Fireball! %s is scorched for %d damage!\n",
+    }
+
+    else if (strcmp(caster->spell, "Fireball") == 0) {
+        int damage = 20 + rand() % 10;
+        printf("🔥 %s casts Fireball! %s takes %d fire damage and starts burning!\n",
                caster->name, target->name, damage);
         target->hp -= damage;
-    } else {
-        printf("🌀 No valid spell found.\n");
+        target->burning = 3;  // burn lasts 3 turns
+    }
+
+    else if (strcmp(caster->spell, "Heal") == 0) {
+        int heal = 30;
+        printf("✨ %s casts Heal and restores %d HP!\n",
+               caster->name, heal);
+        caster->hp += heal;
+        if (caster->hp > MAX_HP) caster->hp = MAX_HP;
+    }
+
+    else {
+        printf("❌ Unknown spell.\n");
         return;
     }
 
-    if (target->hp < 0) target->hp = 0;
     caster->spell_uses--;
+    if (target->hp < 0) target->hp = 0;
+}
+
+void apply_status_effects(Character *c) {
+	if (c->burning > 0) {
+		int burn_dmg = 5 + rand() % + 5;
+		printf("🔥 %s is burning and takes %d fire damage!\n", c->name, burn_dmg);
+		c->hp = burn_dmg;
+		c->burning--;
+		if (c->hp < 0) c->hp = 0;
+	}
 }

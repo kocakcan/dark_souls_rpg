@@ -21,6 +21,8 @@ int main(void) {
 	printf("⚔️  %s vs. %s begins!\n", player.name, boss.name);
 
 	while (is_alive(&player) && is_alive(&boss)) {
+		apply_status_effects(&player);
+		apply_status_effects(&boss);
 		printf("\n--- BATTLE STATUS ---\n");
 		print_status(&player);
 		print_status(&boss);
