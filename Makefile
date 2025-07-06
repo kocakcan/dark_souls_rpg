@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-OBJS = main.o combat.o character.o input.o
+OBJS = main.o combat.o character.o input.o class.o
 
 all: rpg
 

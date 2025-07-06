@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "character.h"
+#include "class.h"
 #include "constants.h"
 #include "combat.h"
 #include "input.h"
@@ -12,7 +13,7 @@ int main(void) {
 	srand(time(NULL));
 
 	Character player;
-	init_character(&player, "Chosen Undead", MAX_HP, 25, 2);
+	choose_class(&player);
 
 	Character boss;
 	init_character(&boss, "Manus, Father of the Abyss", MAX_HP + 50, 20, 0);

@@ -7,6 +7,8 @@ typedef struct {
 	int max_damage;
 	int estus;
 	int rolled;
+	char *weapon;
+	char *spell;
 } Character;
 
 void print_status(Character *c);
