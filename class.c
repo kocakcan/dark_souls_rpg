@@ -36,7 +36,7 @@ void choose_class(Character *player) {
 		case 3: /* Pyromancer */
 			init_character(player, "Pyromancer", 90, 15, 2);
 			player->weapon = "Axe";
-			player->spell = "Fireball";
+			player->spell = "Poison Mist";
 			player->spell_type = "Pyromancy";
 			player->spell_uses = 2;
 			player->str = 10;

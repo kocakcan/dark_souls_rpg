@@ -115,9 +115,17 @@ void cast_spell(Character *caster, Character *target) {
 
         caster->hp += heal;
         if (caster->hp > MAX_HP) caster->hp = MAX_HP;
-    }
+    } else if (strcmp(caster->spell, "Poison Mist") == 0) {
+	int base = 10 + rand() % 10;
+	int scaling = caster->intel / 2;
+	int damage = base + scaling;
 
-    else {
+        printf("🤢 %s casts Poison Mist! %s takes %d poison damage and is poisoned!\n",
+               caster->name, target->name, damage);
+	target->hp -= damage;
+	if (target->hp < 0) target->hp = 0;
+	target->burning = 3;
+    } else {
         printf("❌ Unknown spell: %s\n", caster->spell);
         return;
     }
